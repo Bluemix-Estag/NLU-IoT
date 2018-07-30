@@ -2,7 +2,17 @@
 
 This is the official repository with all code used By Eduardo Petecof and João Pedo P.P during their lecture about how to integrate IoT devices with Chatbots using IBM Cloud.
 
-If you want to reproduce this lecture first thing you need to do s create an acount in [IBM Cloud](https://bluemix.net)
+If you want to reproduce this lecture first thing you need to do is create an acount in [IBM Cloud](https://bluemix.net)
+
+## Architecture Diagram
+
+Parts os the puzzle
+* IBM IoT Platform
+* Function
+* Watson Assistant
+* NodeMCU
+* Omega2+
+* Mobile App
 
 ## Functions
 
@@ -34,6 +44,37 @@ Example of param
 }
 ```
 
+## Watson Assistant
+
+Watson Assistant is a service offered by IBM Cloud. It acts like a natural language interface between the application and the end user working as virtual agent.
+
+In this project it was used to identify the commands that user could enter like:
+
+* ```Faça o led do esp piscar```
+* ```Ascenda o led vermelho do omega```
+
+Once the command was identified the bot itself can call a function hosted in IBM Cloud to send a request to the IoT Platform, sending a command or getting information from one device.
+
+To put this kind of functionality in you bot follow the next steps:
+
+1. Open de dialog node
+2. Open the JSON editor
+3. Add this piece of code in the same lavel as output and context
+```json
+"actions": [
+    {
+      "name": "/<YOUR_ORG>_dev/actions/name_of_your_action",
+      "type": "server",
+      "parameters": {
+        "color": ""
+      },
+      "credentials": "$private.my_credentials",
+      "result_variable": "$result"
+    }
+  ]
+```
+Now your bot is able to call a function without a server.
+
 ## Device code
 
 This folder contains all files used in each device to connect to IBM IoT Platform and perform the required actions.
@@ -53,6 +94,7 @@ If you have an Omega2+ or some development board similar you just need to copy t
 2. fufill the .env file with your IoT credentials and save
    ```env
    IOT_ORG=<YOUR_IOT_ORG_HERE>
+   IOT_ID=<YOUR_IOT_ID_HERE>
    IOT_DEVICE_TYPE=<YOUR_IOT_DEVICE_TYPE>
    IOT_AUTH_KEY=<YOUR_IOT_AUTH_KEY>
    IOT_AUTH_TOKEN=<YOUR_IOT_AUTH_TOKEN>

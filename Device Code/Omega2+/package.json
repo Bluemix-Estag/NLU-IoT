@@ -1,0 +1,16 @@
+{
+  "name": "iot-node",
+  "version": "1.1.0",
+  "description": "Simple Node.js client to connect to IBM Cloud",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "author": "JoaoPedroPP",
+  "license": "MIT",
+  "dependencies": {
+    "ibmiotf": "^0.2.41",
+    "omega2-gpio": "^1.2.4"
+  }
+}
