@@ -6,7 +6,7 @@ If you want to reproduce this lecture first thing you need to do is create an ac
 
 ## Architecture Diagram
 
-Parts os the puzzle
+Parts of the puzzle
 * IBM IoT Platform
 * Function
 * Watson Assistant
