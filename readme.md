@@ -18,9 +18,11 @@ Parts of the puzzle
 
 In this folder you will find the actions that are executed when the bot identifier some command that the iot device should excute.
 
-Inside its there are two folders, one for the NodeMCU+ESP2866 device and other for the Omega.
+Inside its there are two folders, one for the NodeMCU+ESP2866 device and other for the Omega, each one with your proper actions.
 
-Functions are pieces of code hosted in IBM Cloud that you can call to perform an action though an http request.
+Functions are pieces of code hosted in IBM Cloud that you can call to perform an action though an http request. They are very usefull if you want to run part of your code that requests a large amount of resources, needs to be highly available and scalable and you do not have how to provide it, or you simply do not need a server to be on all time, consuming energy, wainting to be called, for that reason is highly recommended to make use of functions.
+
+The process of hibernation and activation of an action is pretty simple. After you have written your code and saved it the action will become a container image, this is the hibernate state. Once you called it by an http request you action will wake and perform what has been written, in other words, it will be created a container from your image that runs just your code. At the end, when your code finish to run the action will hibernate again, in the techical words your container has run every it can do and there no use for it anymore so finish itself.
 
 Example of function:
 
@@ -63,7 +65,7 @@ To put this kind of functionality in you bot follow the next steps:
 ```json
 "actions": [
     {
-      "name": "/<YOUR_ORG>_dev/actions/name_of_your_action",
+      "name": "/<YOUR_ORG>_<YOUR_SPACE>/actions/name_of_your_action",
       "type": "server",
       "parameters": {
         "color": ""
