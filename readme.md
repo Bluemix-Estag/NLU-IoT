@@ -50,6 +50,12 @@ Example of param
 
 Watson Assistant is a service offered by IBM Cloud. It acts like a natural language interface between the application and the end user working as virtual agent.
 
+The service offered by IBM is based on intents and entities to build a dilog flow. Intents can be defined as a piece of phrase that expects an action, for example: "what do you know about IoT? " or "can you tell me about natural language ?", they both can be represented by the intent knowSomething. An easy way to model intents is to look at the verbs of the input your user can use, beacuse in general, verbs expects some kind action when they are used.
+
+Entity is the subject that of your phrase, or what your user is talking about, in the above example, "what do you know about IoT? " and "can you tell me about natural language ?" IoT and natural language can be represented by the entities IOT and NL respectively. To make it clear, entities are the flavours of a pizza.
+
+Once you model your intents and entities you can build yout dilog flow, you can do this whatever you want, you just need to create dilog node and set triggers conditions to each node and define answers to them. 
+
 In this project it was used to identify the commands that user could enter like:
 
 * ```Faça o led do esp piscar```
@@ -61,11 +67,19 @@ To put this kind of functionality in you bot follow the next steps:
 
 1. Open de dialog node
 2. Open the JSON editor
-3. Add this piece of code in the same lavel as output and context
+3. Add this piece of code in the same lavel as output
 ```json
+"contextx":{
+    "private":{
+        "private.my_credentials":{
+            "user":"<YOUR_ACTION_USER>",
+            "password":"<YOUR_ACTION_PASSWORD>"
+        }
+    }
+},
 "actions": [
     {
-      "name": "/<YOUR_ORG>_<YOUR_SPACE>/actions/name_of_your_action",
+      "name": "/<YOUR_ORG>_<YOUR_SPACE>/actions/<NAME_OF_YOUR_ACTION>",
       "type": "server",
       "parameters": {
         "color": ""
