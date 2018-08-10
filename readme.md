@@ -71,7 +71,7 @@ To put this kind of functionality in you bot follow the next steps:
 ```json
 "contextx":{
     "private":{
-        "private.my_credentials":{
+        "my_credentials":{
             "user":"<YOUR_ACTION_USER>",
             "password":"<YOUR_ACTION_PASSWORD>"
         }
