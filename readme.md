@@ -5,7 +5,7 @@ This is the official repository with all code used By Eduardo Petecof and João 
 If you want to reproduce this lecture first thing you need to do is create an acount in [IBM Cloud](https://bluemix.net)
 
 ## Architecture Diagram
-
+![Diagram](/Img/diagrama.jpg)
 Parts of the puzzle
 * IBM IoT Platform
 * Function
