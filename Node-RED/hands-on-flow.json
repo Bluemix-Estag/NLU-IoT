@@ -1,0 +1,428 @@
+[{
+    "id": "78265903.88e9b8",
+    "type": "tab",
+    "label": "Flow 1",
+    "disabled": false,
+    "info": ""
+}, {
+    "id": "62fabd80.affde4",
+    "type": "mqtt out",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "topic": "iot-2/evt/sensor/fmt/json",
+    "qos": "",
+    "retain": "true",
+    "broker": "6206632a.98f6fc",
+    "x": 552,
+    "y": 200.00001525878906,
+    "wires": []
+}, {
+    "id": "94531738.0e3b98",
+    "type": "inject",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "topic": "",
+    "payload": "10000",
+    "payloadType": "num",
+    "repeat": "30",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 159,
+    "y": 206,
+    "wires": [
+        ["da71eedd.3a9d2"]
+    ]
+}, {
+    "id": "9d1c10d7.41f71",
+    "type": "mqtt in",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "topic": "iot-2/cmd/blink/fmt/json",
+    "qos": "2",
+    "broker": "6206632a.98f6fc",
+    "x": 172,
+    "y": 529.9999694824219,
+    "wires": [
+        ["c8b05d9d.ccae4"]
+    ]
+}, {
+    "id": "f975bf0.a63034",
+    "type": "ui_slider",
+    "z": "78265903.88e9b8",
+    "name": "ldr-slider",
+    "label": "slider",
+    "group": "7f4b32c0.76c1ec",
+    "order": 3,
+    "width": 0,
+    "height": 0,
+    "passthru": false,
+    "topic": "ldr",
+    "min": 0,
+    "max": "500",
+    "step": 1,
+    "x": 863.5556030273438,
+    "y": 199.2222442626953,
+    "wires": [
+        ["14590f5a.2292a1", "3226e4d7.4bfa7c", "3aa8d1be.fd20be"]
+    ]
+}, {
+    "id": "f921ecad.0e6ae",
+    "type": "ui_template",
+    "z": "78265903.88e9b8",
+    "group": "7f4b32c0.76c1ec",
+    "name": "LED",
+    "order": 1,
+    "width": "5",
+    "height": "4",
+    "format": "<div class=\"led-box\">\n    <p>Built in LED</p>\n   <div ng-style=\"(msg.payload)\" class=\"led-blue\">\n   </div>\n</div>\n\n\n",
+    "storeOutMessages": true,
+    "fwdInMessages": true,
+    "templateScope": "local",
+    "x": 1011,
+    "y": 672,
+    "wires": [
+        []
+    ]
+}, {
+    "id": "29df1185.fa71ee",
+    "type": "inject",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "topic": "led",
+    "payload": "-off",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": "0",
+    "x": 141,
+    "y": 703.9999694824219,
+    "wires": [
+        ["a01e1db5.434e4"]
+    ]
+}, {
+    "id": "14590f5a.2292a1",
+    "type": "ui_gauge",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "group": "7f4b32c0.76c1ec",
+    "order": 2,
+    "width": 0,
+    "height": 0,
+    "gtype": "gage",
+    "title": "LDR Value",
+    "label": "units",
+    "format": "{{value}}",
+    "min": 0,
+    "max": "500",
+    "colors": ["#00b500", "#e6e600", "#ca3838"],
+    "seg1": "",
+    "seg2": "",
+    "x": 1046.9999389648438,
+    "y": 201.22215270996094,
+    "wires": []
+}, {
+    "id": "3226e4d7.4bfa7c",
+    "type": "change",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "rules": [{
+        "t": "set",
+        "p": "sensor",
+        "pt": "flow",
+        "to": "payload",
+        "tot": "msg"
+    }],
+    "action": "",
+    "property": "",
+    "from": "",
+    "to": "",
+    "reg": false,
+    "x": 1045.4445190429688,
+    "y": 356.44439697265625,
+    "wires": [
+        []
+    ]
+}, {
+    "id": "3aa8d1be.fd20be",
+    "type": "ui_text_input",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "label": "input",
+    "group": "7f4b32c0.76c1ec",
+    "order": 4,
+    "width": 0,
+    "height": 0,
+    "passthru": true,
+    "mode": "number",
+    "delay": "0",
+    "topic": "ldr",
+    "x": 857.77783203125,
+    "y": 357.5555725097656,
+    "wires": [
+        ["3226e4d7.4bfa7c", "14590f5a.2292a1", "f975bf0.a63034"]
+    ]
+}, {
+    "id": "ee4ddf2c.571e",
+    "type": "ui_template",
+    "z": "78265903.88e9b8",
+    "group": "7f4b32c0.76c1ec",
+    "name": "",
+    "order": 5,
+    "width": 0,
+    "height": 0,
+    "format": "<style>\n    .container {\n\tbackground-size: cover;\n  background: rgb(226,226,226); /* Old browsers */\n  background: -moz-linear-gradient(top,  rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(254,254,254,1) 100%); /* FF3.6+ */\n  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(226,226,226,1)), color-stop(50%,rgba(219,219,219,1)), color-stop(51%,rgba(209,209,209,1)), color-stop(100%,rgba(254,254,254,1))); /* Chrome,Safari4+ */\n  background: -webkit-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* Chrome10+,Safari5.1+ */\n  background: -o-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* Opera 11.10+ */\n  background: -ms-linear-gradient(top,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* IE10+ */\n  background: linear-gradient(to bottom,  rgba(226,226,226,1) 0%,rgba(219,219,219,1) 50%,rgba(209,209,209,1) 51%,rgba(254,254,254,1) 100%); /* W3C */\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */\n  padding: 20px;\n}\n\n.led-box {\n  height: 100px;\n  width: 100%;\n  margin: 10px 0;\n}\n\n.led-box p {\n  font-size: 20px;\n  text-align: center;\n  margin: 1em;\n}\n.led-blue {\n  margin: 0 auto;\n  width: 100px;\n  height: 100px;\n  background-color: #0e58a2;\n  border-radius: 50%;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #0e58a2 0 2px 14px;\n  /*animation: blinkBlue;*/\n  /*animation-duration: 1s;*/\n  /*animation-iteration-count: msg.payload;*/\n}\n\n/*.led-blue-on {*/\n/*  margin: 0 auto;*/\n/*  width: 100px;*/\n/*  height: 100px;*/\n/*  background-color: #24E0FF;*/\n/*  border-radius: 50%;*/\n/*  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px;*/\n/*}*/\n\n/*.led-blue-off {*/\n/*  margin: 0 auto;*/\n/*  width: 100px;*/\n/*  height: 100px;*/\n/*  background-color: #0e58a2;*/\n/*  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px;*/\n/*  border-radius: 50%;*/\n/*}*/\n\n@keyframes blinkBlue {\n    from { background-color: #0e58a2; }\n    25% { background-color: #0e58a2;\n    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #0e58a2 0 2px 14px;}\n    50% { background-color: #24E0FF;\n    box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px; }\n    75% { background-color: #24E0FF;\n  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #006 0 -1px 9px, #3F8CFF 0 2px 14px; }\n    to { background-color: #0e58a2;}\n}\n</style>\n<!--<div class=\"container\">-->\n<!--    <div class=\"led-box\">-->\n<!--        <div class=\"led-blue\"></div>-->\n<!--        <p>Yellow LED</p>-->\n<!--  </div>-->\n<!--</div>-->\n    ",
+    "storeOutMessages": true,
+    "fwdInMessages": true,
+    "templateScope": "local",
+    "x": 531,
+    "y": 772,
+    "wires": [
+        []
+    ]
+}, {
+    "id": "72efc377.7149ec",
+    "type": "mqtt in",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "topic": "iot-2/cmd/turn/fmt/json",
+    "qos": "2",
+    "broker": "6206632a.98f6fc",
+    "x": 174,
+    "y": 586.9999694824219,
+    "wires": [
+        ["b63e39da.9b06a8"]
+    ]
+}, {
+    "id": "64c4fbb8.a808d4",
+    "type": "inject",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "topic": "led",
+    "payload": "-on",
+    "payloadType": "str",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 144,
+    "y": 653.9999694824219,
+    "wires": [
+        ["b56a622b.619c1"]
+    ]
+}, {
+    "id": "115d4846.9d0218",
+    "type": "inject",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "topic": "led",
+    "payload": "{\"cmd\":\"blink\",\"value\":3}",
+    "payloadType": "json",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "onceDelay": 0.1,
+    "x": 211,
+    "y": 749.9999694824219,
+    "wires": [
+        ["49787170.a94fe"]
+    ]
+}, {
+    "id": "d68e2036.2e03c",
+    "type": "function",
+    "z": "78265903.88e9b8",
+    "name": "Blink N-Seconds",
+    "func": "\nif(msg.payload.value > 0) {\n    msg.payload = {\n    \"animation\": \"blinkBlue\",\n    \"animation-duration\": \"1s\",\n    \"animation-iteration-count\": msg.payload.value\n    }\n}\nelse{\n    msg.payload = {\n        \"background-color\": \"#0e58a2\",\n        \"animation\": \"null\",\n        \"animation-duration\": \"null\",\n        \"animation-iteration-count\": \"null\"\n    }\n}\n\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 763,
+    "y": 716,
+    "wires": [
+        ["f921ecad.0e6ae", "492de64a.fd8708"]
+    ]
+}, {
+    "id": "a01e1db5.434e4",
+    "type": "function",
+    "z": "78265903.88e9b8",
+    "name": "Turn OFF",
+    "func": "msg.payload = {\n    \"background-color\": \"#0e58a2\"\n}\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 781,
+    "y": 677,
+    "wires": [
+        ["f921ecad.0e6ae"]
+    ]
+}, {
+    "id": "b56a622b.619c1",
+    "type": "function",
+    "z": "78265903.88e9b8",
+    "name": "Turn ON",
+    "func": "msg.payload = {\n    \"background-color\": \"#24E0FF\"\n}\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 792,
+    "y": 637,
+    "wires": [
+        ["f921ecad.0e6ae"]
+    ]
+}, {
+    "id": "b7d302c6.cdb0b",
+    "type": "debug",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "payload",
+    "x": 427,
+    "y": 448.9999694824219,
+    "wires": []
+}, {
+    "id": "492de64a.fd8708",
+    "type": "debug",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 862,
+    "y": 780.9999694824219,
+    "wires": []
+}, {
+    "id": "49787170.a94fe",
+    "type": "trigger",
+    "z": "78265903.88e9b8",
+    "op1": "{\"cmd\":\"blink\",\"value\":0}",
+    "op2": "",
+    "op1type": "json",
+    "op2type": "pay",
+    "duration": "500",
+    "extend": false,
+    "units": "ms",
+    "reset": "",
+    "bytopic": "all",
+    "name": "",
+    "x": 664,
+    "y": 530.9999694824219,
+    "wires": [
+        ["d68e2036.2e03c"]
+    ]
+}, {
+    "id": "c8b05d9d.ccae4",
+    "type": "function",
+    "z": "78265903.88e9b8",
+    "name": "Parse JSON",
+    "func": "let parse = JSON.parse(msg.payload)\n\nmsg.payload = {\n    cmd: parse.d.fields[0].field,\n    value: parse.d.fields[0].value\n}\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 452,
+    "y": 529.9999694824219,
+    "wires": [
+        ["49787170.a94fe", "b7d302c6.cdb0b"]
+    ]
+}, {
+    "id": "4b3c87a1.3cd0e8",
+    "type": "switch",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "property": "payload.value",
+    "propertyType": "msg",
+    "rules": [{
+        "t": "eq",
+        "v": "ON",
+        "vt": "str"
+    }, {
+        "t": "eq",
+        "v": "OFF",
+        "vt": "str"
+    }],
+    "checkall": "true",
+    "repair": false,
+    "outputs": 2,
+    "x": 647,
+    "y": 586.9999694824219,
+    "wires": [
+        ["b56a622b.619c1"],
+        ["a01e1db5.434e4"]
+    ]
+}, {
+    "id": "b63e39da.9b06a8",
+    "type": "function",
+    "z": "78265903.88e9b8",
+    "name": "Parse JSON",
+    "func": "let parse = JSON.parse(msg.payload)\n\nmsg.payload = {\n    cmd: parse.d.fields[0].field,\n    value: parse.d.fields[0].value\n}\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 452,
+    "y": 585.9999694824219,
+    "wires": [
+        ["4b3c87a1.3cd0e8", "b7d302c6.cdb0b"]
+    ]
+}, {
+    "id": "da71eedd.3a9d2",
+    "type": "function",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "func": "counter = flow.get(\"counter\")\nsensor = flow.get(\"sensor\")\n\nif(isNaN(counter) || counter > 1000000){\n    counter = 0;\n}\nelse{\n   counter = counter + msg.payload\n    console.log(counter) \n}\nflow.set(\"counter\", counter)\n\nnewpayload = {\n    d: {\n        counter: counter,\n        sensor: sensor\n    }\n}\n\nreturn {payload: newpayload};",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 313.4499969482422,
+    "y": 323.46665954589844,
+    "wires": [
+        ["ff710338.7738", "62fabd80.affde4"]
+    ]
+}, {
+    "id": "ff710338.7738",
+    "type": "debug",
+    "z": "78265903.88e9b8",
+    "name": "",
+    "active": false,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 520.2606201171875,
+    "y": 322.4359130859375,
+    "wires": []
+}, {
+    "id": "6206632a.98f6fc",
+    "type": "mqtt-broker",
+    "z": "",
+    "name": "",
+    "broker": "7y60pl.messaging.internetofthings.ibmcloud.com",
+    "port": "1883",
+    "clientid": "d:7y60pl:Simulated-Device:my-simulated-device",
+    "usetls": false,
+    "compatmode": true,
+    "keepalive": "60",
+    "cleansession": true,
+    "birthTopic": "iot-2/evt/sensor/fmt/json",
+    "birthQos": "0",
+    "birthPayload": "{d:{counter: 0,sensor: 0}}",
+    "closeTopic": "",
+    "closeQos": "0",
+    "closePayload": "",
+    "willTopic": "",
+    "willQos": "0",
+    "willPayload": ""
+}, {
+    "id": "7f4b32c0.76c1ec",
+    "type": "ui_group",
+    "z": "",
+    "name": "",
+    "tab": "1a6c5ff5.649cf",
+    "disp": true,
+    "width": "5",
+    "collapse": false
+}, {
+    "id": "1a6c5ff5.649cf",
+    "type": "ui_tab",
+    "z": "",
+    "name": "Simulated Device",
+    "icon": "memory"
+}]
